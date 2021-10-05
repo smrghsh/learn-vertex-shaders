@@ -3,6 +3,8 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
 import { Scene } from 'three'
+import testVertexShader from './shaders/test/vertex.glsl'
+import testFragmentShader from './shaders/test/fragment.glsl'
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 // /**
 //  * Base
@@ -20,15 +22,66 @@ const scene = new THREE.Scene()
 scene.background = new THREE.Color('purple')
 scene.add(new THREE.AxesHelper())
 
+//buffer
+// var quantityPoints = 300000
+const particlesGeometry = new THREE.BufferGeometry()
+// const position = new Float32Array(quantityPoints*3)
+// position.forEach((e,i) => {position[i] = Math.random()})
+
+var points = [];
+var rows = 20;
+var columns = 20;
+for(var i = 0; i <rows; i++){
+    for(var j = 0; j <columns; j++){
+        points.push([i,0,j])
+    }
+}
+
+points = points.flat(2)
+points = Float32Array.from(points)
+console.log(points)
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(points ,3))
+
+
+
+
+
+const testMaterial = new THREE.ShaderMaterial({
+    vertexShader: testVertexShader,
+    fragmentShader: testFragmentShader,
+    // size: .02,
+    // sizeAttenuation: true,
+    uniforms: {
+        // uDownload: {value: 0.0},
+        uTime: {value: 0.0},
+    },
+    depthWrite: false,
+    transparent: true,
+    alphaTest: 0.5,
+    // sizeAttentuation: true,
+    // blending: THREE.AdditiveBlending
+})
+
+const particles = new THREE.Points(particlesGeometry, testMaterial)
+scene.add(particles)
+
+
+
+
+
+//Point construction
+
+// shader material
+
+
+//expose uniforms dat.GUI
+
+
 
 //some code to load the .glb file into an avatar
 //set the avatar's blend shapes
 //scene.add(avatar)
 
-const cubeGeometry = new THREE.BoxGeometry(1,1,1)
-const cubeMaterial = new THREE.MeshBasicMaterial({color: 'red'})
-const cube = new THREE.Mesh()
-scene.add(cube)
 
 
 
@@ -78,6 +131,7 @@ const tick = () =>
     // Update controls
     controls.update()
     delta += clock.getDelta();
+    testMaterial.uniforms.uTime.value = elapsedTime
 }
 tick()
 
