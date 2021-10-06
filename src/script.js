@@ -19,7 +19,7 @@ const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
-scene.background = new THREE.Color('purple')
+scene.background = new THREE.Color('black')
 scene.add(new THREE.AxesHelper())
 
 //buffer
@@ -29,10 +29,10 @@ const particlesGeometry = new THREE.BufferGeometry()
 // position.forEach((e,i) => {position[i] = Math.random()})
 
 var points = [];
-var rows = 20;
-var columns = 20;
-for(var i = 0; i <rows; i++){
-    for(var j = 0; j <columns; j++){
+var rows = 60;
+var columns = 60;
+for(var i = 0; i <rows; i+=0.2){
+    for(var j = 0; j <columns; j+=0.2){
         points.push([i,0,j])
     }
 }
@@ -98,9 +98,9 @@ const sizes = {
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = -5
-camera.position.y = 3.0
-camera.lookAt(0,0,0)
+camera.position.x = 30
+camera.position.y = 20
+camera.lookAt(30,0,30)
 scene.add(camera)
 
 // Controls
