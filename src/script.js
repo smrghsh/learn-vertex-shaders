@@ -31,8 +31,8 @@ const particlesGeometry = new THREE.BufferGeometry()
 var points = [];
 var rows = 60;
 var columns = 60;
-for(var i = 0; i <rows; i+=0.2){
-    for(var j = 0; j <columns; j+=0.2){
+for(var i = 0; i <rows; i+=0.1){
+    for(var j = 0; j <columns; j+=0.1){
         points.push([i,0,j])
     }
 }

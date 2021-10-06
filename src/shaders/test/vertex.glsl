@@ -54,7 +54,7 @@ void main() {
     float s = fbm(p + uTime * -0.03);
     float r = fbm(s + p + uTime * 0.1);
 
-    newModelPosition.y += 0.2 * fbm(position.xz);
+    newModelPosition.y += 1.2 * fbm(position.xz + uTime);
 
     vec4 viewPosition = viewMatrix * newModelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;

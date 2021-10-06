@@ -53,6 +53,7 @@ void main() {
     color += fbm(p + r + uTime/10.0);
     color.r += s;
     color.g += r;
+    color += 0.1;
 
     gl_FragColor = vec4(color,1.0);
 }
