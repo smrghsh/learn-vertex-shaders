@@ -44,8 +44,8 @@ const particlesGeometry = new THREE.BufferGeometry()
 var points = [];
 var rows = 10;
 var columns = 10;
-for(var i = 0; i <rows; i+=0.1){
-    for(var j = 0; j <columns; j+=0.1){
+for(var i = 0; i <rows; i+=0.05){
+    for(var j = 0; j <columns; j+=0.05){
         points.push([i,0,j])
     }
 }
@@ -77,7 +77,9 @@ const testMaterial = new THREE.ShaderMaterial({
 
 const particles = new THREE.Points(particlesGeometry, testMaterial)
 scene.add(particles)
-
+particles.scale.x *= 0.5;
+particles.scale.z *= 0.5;
+particles.scale.y *= 0.5;
 
 
 
