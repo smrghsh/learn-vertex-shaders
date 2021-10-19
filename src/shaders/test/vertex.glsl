@@ -54,11 +54,11 @@ void main() {
     float s = fbm(p + uTime * -0.03);
     float r = fbm(s + p + uTime * 0.1);
 
-    newModelPosition.y += 1.2 * fbm(position.xz + uTime);
+    newModelPosition.y += 1.2 * fbm(position.xz + uTime/20.0);
 
     vec4 viewPosition = viewMatrix * newModelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;
     gl_Position = projectedPosition;
-    gl_PointSize = 3.0;
+    gl_PointSize = 5.0;
     vPosition = newModelPosition.xyz;
 }

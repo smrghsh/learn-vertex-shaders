@@ -6,6 +6,9 @@ import { Scene } from 'three'
 import testVertexShader from './shaders/test/vertex.glsl'
 import testFragmentShader from './shaders/test/fragment.glsl'
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
+import horizontalGridVertexShader from './shaders/horizontalGrid/vertex.glsl'
+import horizontalGridFragmentShader from './shaders/horizontalGrid/fragment.glsl'
+
 // /**
 //  * Base
 //  */
@@ -19,8 +22,18 @@ const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
-scene.background = new THREE.Color('black')
+scene.background = new THREE.Color('white')
 scene.add(new THREE.AxesHelper())
+
+const geometry = new THREE.PlaneGeometry( 100, 100 );
+const horizontalGridMaterial = new THREE.ShaderMaterial({
+    vertexShader: horizontalGridVertexShader,
+    fragmentShader: horizontalGridFragmentShader,
+    transparent: true,
+});
+const floorPlane = new THREE.Mesh( geometry, horizontalGridMaterial );
+floorPlane.rotation.x -= Math.PI/2;
+scene.add( floorPlane );
 
 //buffer
 // var quantityPoints = 300000
@@ -29,8 +42,8 @@ const particlesGeometry = new THREE.BufferGeometry()
 // position.forEach((e,i) => {position[i] = Math.random()})
 
 var points = [];
-var rows = 60;
-var columns = 60;
+var rows = 10;
+var columns = 10;
 for(var i = 0; i <rows; i+=0.1){
     for(var j = 0; j <columns; j+=0.1){
         points.push([i,0,j])
@@ -64,7 +77,6 @@ const testMaterial = new THREE.ShaderMaterial({
 
 const particles = new THREE.Points(particlesGeometry, testMaterial)
 scene.add(particles)
-
 
 
 
