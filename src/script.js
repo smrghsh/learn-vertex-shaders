@@ -42,8 +42,8 @@ const particlesGeometry = new THREE.BufferGeometry()
 // position.forEach((e,i) => {position[i] = Math.random()})
 
 var points = [];
-var rows = 10;
-var columns = 10;
+var rows = 7;
+var columns = 7;
 for(var i = 0; i <rows; i+=0.05){
     for(var j = 0; j <columns; j+=0.05){
         points.push([i,0,j])

@@ -46,7 +46,7 @@ float random (in vec2 st) {
     }
 
 void main() {
-    vec2 p = vPosition.xz / 100.0;
+    vec2 p = vPosition.xz / 90.0;
     float s = fbm(p + uTime * -0.03);
     float r = fbm(s + p + uTime * 0.1);
     vec3 color = vec3(0.0);
